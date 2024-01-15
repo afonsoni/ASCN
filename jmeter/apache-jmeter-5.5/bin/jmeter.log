@@ -1,0 +1,59 @@
+2023-11-27 12:20:13,637 INFO o.a.j.u.JMeterUtils: Setting Locale to pt_PT
+2023-11-27 12:20:13,677 ERROR o.a.j.u.JMeterUtils: Could not find resources for 'pt_PT'
+2023-11-27 12:20:13,678 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2023-11-27 12:20:13,678 INFO o.a.j.JMeter: Loading system properties from: system.properties
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: Copyright (c) 1998-2022 The Apache Software Foundation
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: Version 5.5
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: java.version=16.0.2
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: os.name=Mac OS X
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: os.arch=aarch64
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: os.version=14.1.1
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: file.encoding=UTF-8
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: java.awt.headless=null
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: Max memory     =4294967296
+2023-11-27 12:20:13,683 INFO o.a.j.JMeter: Available Processors =10
+2023-11-27 12:20:13,690 INFO o.a.j.JMeter: Default Locale=português (Portugal)
+2023-11-27 12:20:13,690 INFO o.a.j.JMeter: JMeter  Locale=português (Portugal)
+2023-11-27 12:20:13,690 INFO o.a.j.JMeter: JMeterHome=/Users/afonsoni/Downloads/apache-jmeter-5.5
+2023-11-27 12:20:13,690 INFO o.a.j.JMeter: user.dir  =/Users/afonsoni/Downloads/apache-jmeter-5.5/bin
+2023-11-27 12:20:13,691 INFO o.a.j.JMeter: PWD       =/Users/afonsoni/Downloads/apache-jmeter-5.5/bin
+2023-11-27 12:20:13,692 INFO o.a.j.JMeter: IP: 127.0.0.1 Name: MacBook-Pro-Ferreira.local FullName: localhost
+2023-11-27 12:20:13,703 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2023-11-27 12:20:14,285 INFO o.a.j.JMeterGuiLauncher: Setting LAF to: com.github.weisj.darklaf.DarkLaf:com.github.weisj.darklaf.theme.DarculaTheme
+2023-11-27 12:24:09,621 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-27 12:24:09,623 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-27 12:24:09,623 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-27 12:24:09,623 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-27 12:24:09,623 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2023-11-27 12:24:09,623 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2023-11-27 12:28:00,970 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2023-11-27 12:28:00,971 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-11-27 12:28:00,971 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-11-27 12:28:00,972 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2023-11-27 12:28:00,972 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2023-11-27 12:28:00,992 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2023-11-27 12:28:01,020 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Thread Group
+2023-11-27 12:28:01,020 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Thread Group.
+2023-11-27 12:28:01,020 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-11-27 12:28:01,020 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2023-11-27 12:28:01,022 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2023-11-27 12:28:01,022 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2023-11-27 12:28:01,023 INFO o.a.j.t.JMeterThread: Thread started: Thread Group 1-1
+2023-11-27 12:28:01,342 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = MacBook-Pro-Ferreira.local
+2023-11-27 12:28:01,348 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2023-11-27 12:28:01,349 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-11-27 12:28:01,349 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2023-11-27 12:28:01,350 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-11-27 12:28:01,350 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-11-27 13:53:40,905 INFO o.a.j.g.a.Start: Stopping test
+2023-11-27 13:53:40,921 INFO o.a.j.t.JMeterThread: Stopping: Thread Group 1-1
+2023-11-27 13:53:40,922 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2023-11-27 13:53:40,922 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group 1-1
+2023-11-27 13:53:40,923 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2023-11-27 13:53:40,924 INFO o.a.j.s.FileServer: Default base='/Users/afonsoni/Downloads/apache-jmeter-5.5/bin'
+2023-11-27 13:53:40,924 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2023-11-27 13:55:06,680 INFO o.a.j.s.FileServer: Set new base='/Users/afonsoni/Downloads/apache-jmeter-5.5/bin'
+2023-11-27 13:55:06,799 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-11-27 13:55:06,815 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-11-27 13:55:06,816 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
