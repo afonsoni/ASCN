@@ -1,0 +1,38 @@
+---
+# Deployment for deploying Laravelio
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravelio-deployment
+  namespace: "{{ app_namespace }}"
+  labels:
+    app: laravelio
+spec:
+  selector:
+    matchLabels:
+      app: laravelio
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: laravelio # This label is used as a selector in the Service object
+        tier: app
+    spec:
+      containers:
+      - name: laravelio
+        image: rafaelmonteiroking/laravel:v1 # afonsoni/laravelio:latest
+        env: # The variables below could be set on a ConfigMap object
+        - name: url
+          value: http://{{ app_ip }}:{{ app_port }}
+        - name: DB_HOST
+          value: mysql-service.{{ db_namespace }}
+        - name: DB_CONNECTION
+          value: "{{ DB_CONNECTION }}"
+        - name: DB_DATABASE
+          value: "{{ DB_DATABASE }}"
+        - name: DB_USERNAME
+          value: "{{ DB_USERNAME }}"
+        - name: DB_PASSWORD
+          value: "{{ DB_PASSWORD }}"
+        ports:
+        - containerPort: 8000

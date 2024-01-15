@@ -1,0 +1,12 @@
+---
+
+- name: Read dashboard configuration from JSON
+  ansible.builtin.include_vars:
+    file: "{{ dashboard_json }}"
+    name: dashboard_config
+
+- name: Delete dashboard with JSON
+  ansible.builtin.command:
+    cmd: "gcloud monitoring dashboards delete --quiet --project='{{ gcp_project }}' '{{ dashboard_config.name }}'"
+  args:
+    executable: /bin/bash

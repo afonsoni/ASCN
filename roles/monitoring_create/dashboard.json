@@ -1,0 +1,810 @@
+{
+    "dashboardFilters": [
+      {
+        "filterType": "RESOURCE_LABEL",
+        "labelKey": "cluster_name",
+        "stringValue": "ascn-cluster",
+        "templateVariable": ""
+      }
+    ],
+    "displayName": "ascn-cluster-monitoring",
+    "labels": {},
+    "mosaicLayout": {
+      "columns": 48,
+      "tiles": [
+        {
+          "height": 8,
+          "widget": {
+            "scorecard": {
+              "sparkChartView": {
+                "sparkChartType": "SPARK_BAR"
+              },
+              "thresholds": [],
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_MEAN",
+                    "groupByFields": [],
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  },
+                  "filter": "metric.type=\"compute.googleapis.com/instance/cpu/utilization\" resource.type=\"gce_instance\" metadata.system_labels.\"machine_type\"=\"e2-medium\""
+                }
+              }
+            },
+            "title": "VM Instance - CPU utilization for e2-medium [MEAN]"
+          },
+          "width": 16,
+          "xPos": 16
+        },
+        {
+          "height": 8,
+          "widget": {
+            "scorecard": {
+              "sparkChartView": {
+                "sparkChartType": "SPARK_LINE"
+              },
+              "thresholds": [],
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "perSeriesAligner": "ALIGN_RATE"
+                  },
+                  "filter": "metric.type=\"compute.googleapis.com/instance/cpu/usage_time\" resource.type=\"gce_instance\"",
+                  "secondaryAggregation": {
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_MEAN",
+                    "groupByFields": [],
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  }
+                }
+              }
+            },
+            "title": "VM Instance - CPU usage [MEAN]"
+          },
+          "width": 16,
+          "xPos": 32
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Node - Memory usage [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "STACKED_AREA",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/node/memory/used_bytes\" resource.type=\"k8s_node\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "yPos": 16
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "Kubernetes Container - Page faults [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/page_fault_count\" resource.type=\"k8s_container\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "yPos": 44
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "VM Instance - Received bytes [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y2",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"compute.googleapis.com/instance/network/received_bytes_count\" resource.type=\"gce_instance\"\n",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "y2Axis": {
+                "label": "y2Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "xPos": 16,
+          "yPos": 44
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "RTT latencies per GKE Pod [95TH PERCENTILE]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_PERCENTILE_95"
+                      },
+                      "filter": "metric.type=\"networking.googleapis.com/pod_flow/rtt\" resource.type=\"k8s_pod\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "xPos": 16,
+          "yPos": 32
+        },
+        {
+          "height": 8,
+          "widget": {
+            "scorecard": {
+              "sparkChartView": {
+                "sparkChartType": "SPARK_LINE"
+              },
+              "thresholds": [],
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_SUM",
+                    "groupByFields": [],
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  },
+                  "filter": "metric.type=\"compute.googleapis.com/instance_group/size\" resource.type=\"instance_group\""
+                }
+              }
+            },
+            "title": "Instance group size [SUM]"
+          },
+          "width": 16
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Node - CPU usage time [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "STACKED_AREA",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/node/cpu/core_usage_time\" resource.type=\"k8s_node\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24,
+          "yPos": 16
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "VM Instance - IO Time [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "STACKED_AREA",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"compute.googleapis.com/guest/disk/io_time\" resource.type=\"gce_instance\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "yPos": 32
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "VM Instance - CPU utilization [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"compute.googleapis.com/instance/cpu/utilization\" resource.type=\"gce_instance\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "xPos": 32,
+          "yPos": 32
+        },
+        {
+          "height": 12,
+          "widget": {
+            "title": "VM Memory Used [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"compute.googleapis.com/instance/memory/balloon/ram_used\" resource.type=\"gce_instance\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 16,
+          "xPos": 32,
+          "yPos": 44
+        },
+        {
+          "height": 8,
+          "widget": {
+            "scorecard": {
+              "sparkChartView": {
+                "sparkChartType": "SPARK_LINE"
+              },
+              "thresholds": [],
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_MEAN",
+                    "groupByFields": [],
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  },
+                  "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\""
+                }
+              }
+            },
+            "title": "Kubernetes Container - Memory usage [MEAN]"
+          },
+          "width": 16,
+          "yPos": 8
+        },
+        {
+          "height": 8,
+          "widget": {
+            "scorecard": {
+              "gaugeView": {
+                "lowerBound": 0,
+                "upperBound": 1
+              },
+              "thresholds": [],
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "aggregation": {
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_MEAN",
+                    "groupByFields": [],
+                    "perSeriesAligner": "ALIGN_MEAN"
+                  },
+                  "filter": "metric.type=\"kubernetes.io/container/cpu/request_utilization\" resource.type=\"k8s_container\""
+                }
+              }
+            },
+            "title": "Kubernetes Container - CPU request utilization [MEAN]"
+          },
+          "width": 16,
+          "xPos": 16,
+          "yPos": 8
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Container - CPU usage time for laravelio [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/core_usage_time\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/limit_cores\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/request_cores\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "yPos": 56
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Container - Memory usage for laravelio [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/request_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/limit_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"laravelio\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24,
+          "yPos": 72
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Container - CPU usage time for mysql [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/core_usage_time\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/limit_cores\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/request_cores\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "yPos": 72
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Kubernetes Container - Memory usage for mysql [MEAN]",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/request_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/memory/limit_bytes\" resource.type=\"k8s_container\" resource.label.\"container_name\"=\"mysql\"",
+                      "secondaryAggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_NONE"
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24,
+          "yPos": 56
+        }
+      ]
+    }
+  }

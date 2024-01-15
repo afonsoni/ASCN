@@ -1,0 +1,24 @@
+- name: Delete Laravel Deployment
+  shell: kubectl --namespace {{ app_namespace }} delete deployment laravelio-deployment
+  
+- name: Delete Laravel Service
+  shell: kubectl --namespace {{ app_namespace }} delete svc laravelio-service
+
+#- name: Delete Laravel PVC
+#  shell: kubectl --namespace {{ app_namespace }} delete pvc laravelio-pv-claim
+
+- name: Delete mySQL Deployment
+  shell: kubectl --namespace {{ db_namespace }} delete deployment mysql-deployment
+
+- name: Delete mySQL Service
+  shell: kubectl --namespace {{ db_namespace }} delete svc mysql-service
+
+- name: Deleting Persistent Volume Claim
+  k8s:
+    name: mysql-pv-claim
+    namespace: "{{ db_namespace }}"
+    api_version: v1
+    kind: PersistentVolumeClaim
+    state: absent
+    wait: yes
+  when: delete_data is defined and delete_data == 'true'

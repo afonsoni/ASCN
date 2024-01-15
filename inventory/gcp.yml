@@ -1,0 +1,35 @@
+---
+all:
+  vars:
+
+    # GKE cluster variables
+    gcp_project: ascn-405011              # ID of GCP Project
+    gcp_auth_kind: serviceaccount            # Do not change
+    gcp_cred_file: ./ascn-405011-74447d1c1db7.json    # Path to service account keys (json file downloaded from GCP)
+
+    gcp_zone: us-central1-a
+    gcp_image_type: ubuntu_containerd
+    gcp_machine_type: e2-small          # Can be changed if necessary
+    gcp_disk_size_gb: 100                # Can be changed if necessary
+    gcp_initial_node_count: 2            # Number of nodes to create. Can be changed if necessary
+
+    # APP variables
+    app_ip: 34.72.238.100
+    app_port: 8000
+
+    app_namespace: laravelio
+    db_namespace: mysql
+
+    # Additional variables
+    DB_CONNECTION: mysql
+    DB_HOST: mysql-service
+    DB_DATABASE: laravelio
+    DB_USERNAME: testing
+    DB_PASSWORD: password
+    
+    MYSQL_USER: testing
+    MYSQL_PASSWORD: password
+    MYSQL_DATABASE: laravelio
+    MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+    dashboard_json: ./roles/monitoring_create/dashboard.json

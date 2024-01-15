@@ -1,0 +1,17 @@
+---
+- name: Wait for migrations being done
+  shell: "kubectl get svc laravelio-service --namespace {{ app_namespace }} -o wide --no-headers | awk '{print $4}'"
+  register: ip
+  until: ip.stdout != '<pending>' # Repeat until it is true
+  retries: 10
+  delay: 10
+
+- name: Get app pod name
+  shell: "kubectl get pods -n {{ app_namespace }} -l app=laravelio -o jsonpath='{.items[0].metadata.name}'"
+  register: app_pod_name
+
+- name: Run command in the pod
+  command: "kubectl exec -n {{ app_namespace }} {{ app_pod_name.stdout }} -- php artisan migrate"
+
+- name: Run command in the pod
+  command: "kubectl exec -n {{ app_namespace }} {{ app_pod_name.stdout }} -- php artisan db:seed"

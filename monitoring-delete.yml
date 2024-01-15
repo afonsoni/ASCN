@@ -1,0 +1,5 @@
+- name: Delete Dashboards
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - monitoring_delete

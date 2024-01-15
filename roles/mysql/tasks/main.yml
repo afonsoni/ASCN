@@ -1,0 +1,30 @@
+---
+# Deployment for MySQL
+- name: Imprimir mensagem
+  debug:
+      msg: "{{ db_namespace }}"
+
+- name: Create db namespace
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Namespace
+    name: "{{ db_namespace }}"
+    state: present
+
+- name: PVC MySQL
+  kubernetes.core.k8s:
+    state: present
+    #src: roles/mysql/templates/mysql-pvc.yml
+    definition: "{{ lookup('template', 'roles/mysql/templates/mysql-pvc.yml') | from_yaml }}"
+
+- name: Deploy MySQL
+  kubernetes.core.k8s:
+    state: present
+    #src: roles/mysql/templates/mysql-deployment.yml
+    definition: "{{ lookup('template', 'roles/mysql/templates/mysql-deployment.yml') | from_yaml }}"
+
+- name: Start MySQL Service
+  kubernetes.core.k8s:
+    state: present
+    #src: roles/mysql/templates/mysql-service.yml
+    definition: "{{ lookup('template', 'roles/mysql/templates/mysql-service.yml') | from_yaml }}"

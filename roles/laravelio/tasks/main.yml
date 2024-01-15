@@ -1,0 +1,115 @@
+---
+#Deploy Laravel App on Kubernetes
+- name: Imprimir mensagem
+  debug:
+      msg: "{{ app_namespace }}"
+
+- name: Create laravel namespace
+  kubernetes.core.k8s:
+    state: present
+    api_version: v1
+    name: "{{ app_namespace }}"
+    kind: Namespace
+
+- name: Deploy laravelio app
+  kubernetes.core.k8s:
+    state: present
+    #src: roles/laravelio/templates/laravelio-deployment.yml
+    definition: "{{ lookup('template', 'roles/laravelio/templates/laravelio-deployment.yml') | from_yaml }}"
+
+- name: Wait...
+  shell: sleep 10
+
+- name: Retrieve Laravel Pod Name
+  command: kubectl get pods -l app=laravelio -o jsonpath='{.items[0].metadata.name}' --namespace {{ app_namespace }}
+  register: app_pod_name
+
+- name: Display Laravel Pod Name
+  debug:
+    var: app_pod_name.stdout
+
+- name: Wait...
+  shell: sleep 10
+
+- name: Start laravelio service
+  kubernetes.core.k8s:
+    #src: roles/laravelio/templates/laravelio-service.yml
+    state: present
+    definition: "{{ lookup('template', 'roles/laravelio/templates/laravelio-service.yml') | from_yaml }}"
+
+- name: Verify that the app service is running and the app external ip is exposed
+  command: kubectl get services -l app=laravelio --namespace="{{ app_namespace }}"
+  register: app_service_status
+  until: app_service_status.stdout.find('laravelio') != -1
+  retries: 60
+  delay: 10
+
+- name: Get service ip and port
+  kubernetes.core.k8s_info:
+    kind: Service
+    name: laravelio-service
+    namespace: "{{ app_namespace }}"
+  register: laravelio_service
+  until: laravelio_service.resources[0].status.loadBalancer.ingress is defined
+  retries: 10
+  delay: 10
+
+- name: Define laravelio ip and port
+  set_fact:
+    app_ip: "{{ laravelio_service.resources[0].status.loadBalancer.ingress[0].ip }}"
+    app_port: "{{ laravelio_service.resources[0].spec.ports[0].port }}"
+
+- name: Remove existing app_ip value
+  ansible.builtin.replace:
+    path: inventory/gcp.yml
+    regexp: '  app_ip:.*$'
+    replace: '  app_ip: '
+
+- name: Remove existing app_port value
+  ansible.builtin.replace:
+    path: inventory/gcp.yml
+    regexp: '  app_port:.*$'
+    replace: '  app_port: '
+
+- name: Add new app_ip value
+  ansible.builtin.replace:
+    path: inventory/gcp.yml
+    regexp: '  app_ip:.*$'
+    replace: '  app_ip: {{ app_ip }}'
+
+- name: Add new app_port value
+  ansible.builtin.replace:
+    path: inventory/gcp.yml
+    regexp: '  app_port:.*$'
+    replace: '  app_port: {{ app_port }}'
+
+- name: Print laravel URL
+  debug:
+    msg: "Laravel url: http://{{ app_ip }}:{{ app_port }}"
+
+- name: wait for Laravel Service to start
+  shell: sleep 90
+
+- name: Create Horizontal Pod Autoscaler
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: autoscaling/v2 
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: cpu-autoscale # name of the hpa
+        namespace: "{{ app_namespace }}"
+      spec:
+        scaleTargetRef:
+          apiVersion: apps/v1 
+          kind: Deployment 
+          name: laravelio-deployment
+        maxReplicas: 3
+        minReplicas: 1
+        metrics: 
+        - type: Resource
+          resource:
+            name: cpu 
+            target:
+              type: Utilization
+              averageUtilization: 75 

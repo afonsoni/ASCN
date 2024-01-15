@@ -1,0 +1,31 @@
+---
+
+- name: Enable Monitoring API in GKE
+  ansible.builtin.command:
+    cmd: "gcloud services enable monitoring.googleapis.com --project={{ gcp_project }}"
+  args:
+    executable: /bin/bash
+
+- name: Enable compute.googleapis.com service in GKE
+  ansible.builtin.command:
+    cmd: "gcloud services enable compute.googleapis.com --project={{ gcp_project }}"
+  args:
+    executable: /bin/bash
+
+- name: Enable cloudbuild.googleapis.com service in GKE
+  ansible.builtin.command:
+    cmd: "gcloud services enable cloudbuild.googleapis.com --project={{ gcp_project }}"
+  args:
+    executable: /bin/bash
+
+- name: Create dashboard with JSON
+  ansible.builtin.command:
+    cmd: "gcloud monitoring dashboards create --project='{{ gcp_project }}' --config-from-file='{{ dashboard_json }}'"
+  args:
+    executable: /bin/bash
+
+- name: List dashboards created
+  command: gcloud monitoring dashboards --project="{{ gcp_project }}" list
+  register: list
+
+- debug: msg='{{ list }}'

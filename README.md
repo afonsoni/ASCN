@@ -1,2 +1,12 @@
-# ASCN
-Aplicações e Serviços de Computação em Nuvem
+Membros do grupo:
+
+
+Afonso Nogueira Ferreira
+
+Catarina Teves Martins da Costa
+
+Cátia Sofia Moreira Cardoso
+
+Marta Aguiar
+
+Rafael Monteiro

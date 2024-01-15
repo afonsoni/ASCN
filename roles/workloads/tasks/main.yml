@@ -1,0 +1,56 @@
+- name: Set constant timer delay
+  set_fact:
+    constant_timer_delay: 300 # In milliseconds
+
+- name: Set number of threads to 10000
+  set_fact:
+    thread_num: 10000
+
+- name: Create jmeter workload file
+  template:
+    src: workload
+    dest: "./jmeter/workloads/workload.jmx"
+
+- name: Run jmeter workload with {{ thread_num }} threads
+  shell: "./jmeter/apache-jmeter-5.5/bin/jmeter -n -t ./jmeter/workloads/workload.jmx -l ./results.jtl"
+  register: jmeter_output
+
+- name: Cooldown of 10 seconds for the next workload
+  pause:
+    seconds: 10
+
+- name: Change thread number to 10000
+  set_fact:
+    thread_num: 5000
+
+- name: Run jmeter workload with {{ thread_num }} threads
+  shell: "./jmeter/apache-jmeter-5.5/bin/jmeter -n -t ./jmeter/workloads/workload.jmx -l ./results.jtl"
+  register: jmeter_output
+
+- name: Cooldown of 2 minutes for the next workload
+  pause:
+    seconds: 120
+
+- name: Change thread number to 50000
+  set_fact:
+    thread_num: 50000
+
+- name: Run jmeter workload with {{ thread_num }} threads
+  shell: "./jmeter/apache-jmeter-5.5/bin/jmeter -n -t ./jmeter/workloads/workload.jmx -l ./results.jtl"
+  register: jmeter_output
+
+- name: Change thread number to 50000
+  set_fact:
+    thread_num: 50000
+
+- name: Run jmeter workload with {{ thread_num }} threads
+  shell: "./jmeter/apache-jmeter-5.5/bin/jmeter -n -t ./jmeter/workloads/workload.jmx -l ./results.jtl"
+  register: jmeter_output
+
+- name: Change thread number to 100000
+  set_fact:
+    thread_num: 100000
+
+- name: Run jmeter workload with {{ thread_num }} threads
+  shell: "./jmeter/apache-jmeter-5.5/bin/jmeter -n -t ./jmeter/workloads/workload.jmx -l ./results.jtl"
+  register: jmeter_output

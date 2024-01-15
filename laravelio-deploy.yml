@@ -1,0 +1,8 @@
+- name: Call role to deploy laravel.io and its components
+  hosts: localhost
+  gather_facts: false
+  roles:
+      - { role: monitoring_create, when: "monitoring_create is defined and monitoring_create == 'true'" }
+      - mysql
+      - laravelio
+      - { role: seed_database, when: "seed_database is defined and seed_database == 'true'" }

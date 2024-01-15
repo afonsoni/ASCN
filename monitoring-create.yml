@@ -1,0 +1,5 @@
+- name: Create Dashboards
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - monitoring_create

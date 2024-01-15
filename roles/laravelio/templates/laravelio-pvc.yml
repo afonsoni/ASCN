@@ -1,0 +1,16 @@
+---
+# Persistent Volume Claim for Laravelio pod
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: laravelio-pv-claim
+  namespace: "{{ app_namespace }}"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 20Gi
+
+

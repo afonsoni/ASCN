@@ -1,0 +1,7 @@
+---
+# Playbook to undeploy Laravelio and its component
+- name: Undeploy Laravelio
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - undeploy
